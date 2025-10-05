@@ -1,9 +1,12 @@
 pipeline {
   agent any
-  triggers { pollSCM('H/5 * * * *') } // poll every ~5 minutes (hashed)
+  triggers { pollSCM('H/5 * * * *') }
+
   stages {
     stage('Checkout') {
-      steps { echo "Checked out ${env.BRANCH_NAME} from ${env.GIT_URL ?: 'SCM'}" }
+      steps {
+        echo "Checked out ${env.BRANCH_NAME} from ${env.GIT_URL ?: 'SCM'}"
+      }
     }
     stage('Build') {
       steps { echo 'Build stage (placeholder)' }
@@ -27,7 +30,12 @@ pipeline {
       steps { echo 'Deploy to prod (placeholder)' }
     }
   }
+
   post {
-    always { echo "Build finished with status: ${currentBuild.currentResult}" }
+    always {
+      echo "Build finished with status: ${currentBuild.currentResult}"
+    }
   }
 }
+
+
